@@ -57,7 +57,10 @@ class Game extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            history: [{squares: Array(9).fill(null)}],
+            history: [{
+                squares: Array(9).fill(null),
+                lastMove: null,
+            }],
             stepNumber: 0,
             xIsNext: true,
         }
@@ -73,6 +76,7 @@ class Game extends React.Component {
             this.setState({
                 history: history.concat([{
                     squares: squares,
+                    lastMove: i,
                 }]),
                 xIsNext: !this.state.xIsNext,
                 stepNumber: history.length,
@@ -86,13 +90,22 @@ class Game extends React.Component {
         const current = history[this.state.stepNumber];
         const winner = calculateWinner(current.squares);
 
+        console.log(history)
+
         const moves = history.map((step, move) => {
+            console.log("setp : ", step)
+            console.log("move : ", move)
+            let colonne, ligne = 0;
+            if (history[move].lastMove != null) {
+                colonne = (history[move].lastMove % 3) + 1;
+                ligne = Math.floor(history[move].lastMove / 3) + 1;
+            }
             const desc = move ?
-                "Revenir au tour n° " + move :
+                "N° " + move + " -> " + ((move % 2) !== 0 ? 'X' : 'O') + " (Col. " + colonne + ", Lig. " + ligne + ")" :
                 "Revenir au debut de partie";
             return (
                 <li key={move}>
-                    <button className="btn-time-travel" onClick={()=>this.jumpTo(move)}>{desc}</button>
+                    <button className="btn-time-travel" onClick={() => this.jumpTo(move)}>{desc}</button>
                 </li>
             )
         })
@@ -107,10 +120,9 @@ class Game extends React.Component {
         } else {
             status = 'Prochain joueur : ' + (this.state.xIsNext ? 'X' : 'O');
         }
-        console.log(winner)
         return (
             <div className="game">
-                <div className="game-board">
+                <div className="game-board" id="board">
                     <Board
                         className={className}
                         winningSquares={winner ? winner : []}

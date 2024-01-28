@@ -118,7 +118,6 @@ ol, ul {
 }
 
 @keyframes disappear {
-    from {}
     to {
         font-size: 0;
         opacity: 0;
