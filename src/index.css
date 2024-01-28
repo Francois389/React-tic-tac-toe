@@ -67,6 +67,16 @@ ol, ul {
     text-align: center;
 }
 
+.board {
+    border: 1px solid #999;
+}
+
+.game-null > div > button {
+    animation-name: disappear;
+    animation-duration: 1.5s;
+    animation-fill-mode: forwards;
+}
+
 .game-info {
     margin-left: 20px;
     font-size: 2.5vh;
@@ -104,6 +114,14 @@ ol, ul {
     }
     100% {
         font-size: 14vh;
+    }
+}
+
+@keyframes disappear {
+    from {}
+    to {
+        font-size: 0;
+        opacity: 0;
     }
 }
 

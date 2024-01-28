@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import {logDOM} from "@testing-library/react";
 
 
 function Square(props) {
@@ -32,7 +31,7 @@ class Board extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className={this.props.className}>
                 <div className="board-row">
                     {this.renderSquare(0)}
                     {this.renderSquare(1)}
@@ -99,10 +98,12 @@ class Game extends React.Component {
         })
 
         let status;
+        let className = "board";
         if (winner) {
             status = (!this.state.xIsNext ? 'X' : 'O') + ' a gagné';
         } else if (this.state.stepNumber === 9) {
             status = 'Match nul';
+            className += " game-null";
         } else {
             status = 'Prochain joueur : ' + (this.state.xIsNext ? 'X' : 'O');
         }
@@ -111,6 +112,7 @@ class Game extends React.Component {
             <div className="game">
                 <div className="game-board">
                     <Board
+                        className={className}
                         winningSquares={winner ? winner : []}
                         squares={current.squares}
                         onClick={(i) => this.handleClick(i)}
