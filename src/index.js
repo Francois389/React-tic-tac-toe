@@ -93,7 +93,7 @@ class Game extends React.Component {
                 "Revenir au debut de partie";
             return (
                 <li key={move}>
-                    <button onClick={()=>this.jumpTo(move)}>{desc}</button>
+                    <button className="btn-time-travel" onClick={()=>this.jumpTo(move)}>{desc}</button>
                 </li>
             )
         })
@@ -101,6 +101,8 @@ class Game extends React.Component {
         let status;
         if (winner) {
             status = (!this.state.xIsNext ? 'X' : 'O') + ' a gagné';
+        } else if (this.state.stepNumber === 9) {
+            status = 'Match nul';
         } else {
             status = 'Prochain joueur : ' + (this.state.xIsNext ? 'X' : 'O');
         }
@@ -114,9 +116,10 @@ class Game extends React.Component {
                         onClick={(i) => this.handleClick(i)}
 
                     />
+                    <div className="status">{status}</div>
                 </div>
                 <div className="game-info">
-                    <div>{status}</div>
+                    <div>Historique des mouvements</div>
                     <ol>{moves}</ol>
                 </div>
             </div>

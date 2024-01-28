@@ -1,6 +1,11 @@
+* {
+    color: white;
+}
+
 body {
     font: 14px "Century Gothic", Futura, sans-serif;
     margin: 20px;
+    background-color: #1e1f22;
 }
 
 ol, ul {
@@ -13,23 +18,34 @@ ol, ul {
     display: table;
 }
 
+#root {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    font-size: larger;
+}
+
 .status {
-    margin-bottom: 10px;
+    margin: 10px 0;
+    font-size: 5vh;
+    color: white;
 }
 
 .square {
-    background: #fff;
+    background: #1e1f22;
     border: 1px solid #999;
     float: left;
-    font-size: 24px;
+    font-size: 15vh;
     font-weight: bold;
     line-height: 34px;
-    height: 34px;
+    height: 20vh;
     margin-right: -1px;
     margin-top: -1px;
     padding: 0;
     text-align: center;
-    width: 34px;
+    width: 20vh;
+    color: white;
 }
 
 .square:focus {
@@ -45,10 +61,61 @@ ol, ul {
     flex-direction: row;
 }
 
+.game-board {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
 .game-info {
     margin-left: 20px;
+    font-size: 2.5vh;
+}
+
+.btn-time-travel {
+    background-color: #1e1f22;
+    border: 1px solid #999;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    padding: 5px;
+}
+
+.btn-time-travel:hover {
+    background-color: #999;
 }
 
 .winning-square {
-    color: #0F0;
+    color: #16a216;
+    animation-name: fade;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes fade {
+    0% {
+        font-size: 14vh;
+    }
+    50% {
+        font-size: 16vh;
+    }
+    100% {
+        font-size: 14vh;
+    }
+}
+
+
+/* Téléphone */
+@media screen and (max-width: 800px) {
+    .game {
+        flex-direction: column;
+    }
+
+    .square {
+        height: 10vh;
+        width: 10vh;
+    }
 }
